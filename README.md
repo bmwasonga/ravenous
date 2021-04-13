@@ -1,1 +1,1 @@
-hey. I am creating a React app
+hey. I am creating a React app that uses an API to show data

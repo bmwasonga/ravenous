@@ -5,7 +5,7 @@ import './BusinessList.css';
 class BusinessList extends React.Component {
   render() {
     return (
-      <div className="businesslist">
+      <div className="businessList">
         <Business />
         <Business />
         <Business />

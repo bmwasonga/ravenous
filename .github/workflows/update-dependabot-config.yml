@@ -1,0 +1,40 @@
+# .github/workflows/update-dependabot-config.yml
+name: Update Dependabot Configuration
+
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Runs weekly on Monday at 00:00
+  workflow_dispatch:
+
+jobs:
+  update-config:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install -g @octokit/rest
+
+    - name: Update dependabot.yml
+      run: |
+        # This example uses a Node.js script to update the dependabot.yml file.
+        # Replace this with your update logic.
+        echo "Updating dependabot.yml"
+        node update-dependabot.js
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add .github/dependabot.yml
+        git commit -m "Update Dependabot configuration"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
